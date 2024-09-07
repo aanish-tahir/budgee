@@ -40,6 +40,13 @@ export default function RootLayout() {
                     title: 'Add Account',
                     }}
                 />
+                <Stack.Screen
+                    name="add-transaction"
+                    options={{
+                    presentation: 'modal',
+                    title: 'Add Transaction',
+                    }}
+                />
             </Stack>
         </NativeBaseProvider>
     // </ThemeProvider>

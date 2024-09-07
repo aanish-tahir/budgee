@@ -8,7 +8,7 @@ import { useRouter } from 'expo-router';
 export default function HomeScreen() {
     const router = useRouter();
   return (
-    <Box safeArea flex="1" width="100%">
+    <Box safeArea flex={1} width="100%">
         <VStack space={5} padding={3} alignItems="center">
         {/* First Card */}
         <Box
@@ -30,6 +30,7 @@ export default function HomeScreen() {
         </Box>
 
         <ExpensesCard/>
+        <Button onPress={() => router.push('/add-transaction')}>Add Transaction</Button>
       </VStack>
     </Box>
   );
