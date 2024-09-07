@@ -33,6 +33,13 @@ export default function RootLayout() {
             <Stack>
                 <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
                 <Stack.Screen name="+not-found" />
+                <Stack.Screen
+                    name="add-account"
+                    options={{
+                    presentation: 'modal',
+                    title: 'Add Account',
+                    }}
+                />
             </Stack>
         </NativeBaseProvider>
     // </ThemeProvider>

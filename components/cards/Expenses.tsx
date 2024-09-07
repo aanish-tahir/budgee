@@ -26,7 +26,7 @@ export default function ExpensesCard() {
         <Text color="black" fontSize="sm" fontWeight="bold">PKR 137,361</Text>
         <VStack marginTop={2} space={2}>
             {sortedExpenses.map(expense => (
-                <ExpenseItem category={expense.category} spent={expense.spent}/>
+                <ExpenseItem key={expense.category} category={expense.category} spent={expense.spent}/>
             ))}
         </VStack>
     </Box>
