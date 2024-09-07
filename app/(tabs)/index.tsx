@@ -1,4 +1,6 @@
-import { Box, Container, Text , VStack} from 'native-base';
+import ExpensesCard from '@/components/cards/Expenses';
+import Grid from '@/components/Grid';
+import { Box,  Text , VStack} from 'native-base';
 
 export default function HomeScreen() {
   return (
@@ -7,7 +9,6 @@ export default function HomeScreen() {
         {/* First Card */}
         <Box
           width="100%"
-          height={150}
           bg="white"
           shadow={2}
           borderRadius="md"
@@ -15,19 +16,12 @@ export default function HomeScreen() {
           paddingY={2}
         >
           <Text color="gray.700" fontSize="md">What You Have</Text>
+          <Text color="black" fontSize="sm" fontWeight="bold">PKR 137,361</Text>
+          <Grid/>
+
         </Box>
 
-        <Box
-          width="100%"
-          height={150}
-          bg="secondary.400"
-          shadow={2}
-          borderRadius="md"
-          padding={4}
-          justifyContent="center"
-        >
-          <Text color="white" fontSize="lg">Second Full Width Card</Text>
-        </Box>
+        <ExpensesCard/>
       </VStack>
     </Box>
   );
