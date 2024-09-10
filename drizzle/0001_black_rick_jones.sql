@@ -1,0 +1,1 @@
+ALTER TABLE `accounts` ADD `account_name` text NOT NULL;

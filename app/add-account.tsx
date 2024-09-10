@@ -1,18 +1,28 @@
-import { Box, Text, VStack, FormControl, Input, Button, Alert } from "native-base";
+import {
+    Box,
+    Text,
+    VStack,
+    FormControl,
+    Input,
+    Button,
+    Alert,
+} from "native-base";
 import { useState } from "react";
 import RowRadioButton from "@/components/RowRadioButtons";
+import { createAccount } from "@/services/db/accounts";
+import { router } from "expo-router";
 
 const accountTypeOptions = [
     {
         id: "bankAccount",
         label: "Bank Account",
-        value: "bankAccount"
+        value: "bankAccount",
     },
     {
         id: "person",
         label: "Person",
-        value: "person"
-    }
+        value: "person",
+    },
 ];
 
 export default function AddAccount() {
@@ -22,18 +32,24 @@ export default function AddAccount() {
     const [balanceType, setBalanceType] = useState("positive");
     const [error, setError] = useState("");
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         if (!accountName.trim()) {
             setError("Account name cannot be empty.");
             return;
         }
         setError("");
-        console.log("Form submitted:", { accountType, accountName, openBalance, balanceType });
+        const accountId = await createAccount("1", accountName, accountType);
+        console.log("New account id:", accountId);
+        router.navigate("/(tabs)/");
     };
 
     return (
         <VStack flex={1} space={4} padding={4}>
-            <RowRadioButton options={accountTypeOptions} selectedId={accountType} setSelectedId={setAccountType} />
+            <RowRadioButton
+                options={accountTypeOptions}
+                selectedId={accountType}
+                setSelectedId={setAccountType}
+            />
 
             <VStack space={2}>
                 <FormControl isRequired isInvalid={!!error}>
@@ -44,7 +60,9 @@ export default function AddAccount() {
                         placeholder="Enter account name"
                     />
                     {error ? (
-                        <FormControl.ErrorMessage>{error}</FormControl.ErrorMessage>
+                        <FormControl.ErrorMessage>
+                            {error}
+                        </FormControl.ErrorMessage>
                     ) : null}
                 </FormControl>
 
@@ -60,13 +78,27 @@ export default function AddAccount() {
 
                 <FormControl>
                     <FormControl.Label>Balance Type</FormControl.Label>
-                    <RowRadioButton options={[
-                        {id: "positive", label:"Positive", value:"positive"},
-                        {id: "negative", label:"Negative", value:"negative"}
-                    ]} selectedId={balanceType} setSelectedId={setBalanceType} />
+                    <RowRadioButton
+                        options={[
+                            {
+                                id: "positive",
+                                label: "Positive",
+                                value: "positive",
+                            },
+                            {
+                                id: "negative",
+                                label: "Negative",
+                                value: "negative",
+                            },
+                        ]}
+                        selectedId={balanceType}
+                        setSelectedId={setBalanceType}
+                    />
                 </FormControl>
             </VStack>
-            <Button onPress={handleSubmit} textAlign="center">Add Account</Button>
+            <Button onPress={handleSubmit} textAlign="center">
+                Add Account
+            </Button>
         </VStack>
     );
 }
